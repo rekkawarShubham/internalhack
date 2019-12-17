@@ -76,8 +76,8 @@ let sendMail = function (email) {
 		service: 'gmail',
 		// port: 2525,
 		auth: {
-			user: 'internalhack2020@gmail.com',
-			pass: 'internalhack@1'
+			user: process.env.NODEMAILER_EMAIL,
+			pass: process.env.NODEMAILER_PASS
 		}
 	});
 	/// To do : assume already reg students has unique email
@@ -127,7 +127,7 @@ let sendWelcomeMail = async function (email, user) {
 		var email = {
 			from: 'internalhack2020@gmail.com',
 			to: user.email,
-			subject: 'Registration Successfull',
+			subject: 'Registration Successful',
 			//text: 'ested password reset Link. This link is only valid for 30 minutes.',
 			html: htmlToSend
 		};
@@ -137,17 +137,21 @@ let sendWelcomeMail = async function (email, user) {
 
 
 let validateLogin = async function (req, res) {
+	console.log(req.body);
+	
 	const user = await User.findOne({
 		_id: req.body.reg_id
 	});
-	if (!user) return res.status(400).json({
-		registered: false
+	console.log(user);
+	
+	if (!user) return res.json({
+		problem: 'invalid_username'
 	});
 	console.log(req.body);
 	
 	const validPass = await bcrypt.compare(req.body.password, user.password);
-	if (!validPass) return res.status(400).json({
-		password: false
+	if (!validPass) return res.json({
+		problem: 'invalid_password'
 	});
 
 	const jwtExpirySeconds = constants.JWT_EXPIRY_SECONDS;
@@ -169,8 +173,10 @@ let validateLogin = async function (req, res) {
 	res.cookie(constants.JWT_TOKEN_KEY, generated_token, {
 		maxAge: jwtExpirySeconds * 1000
 	});
-	return res.redirect('/account/profile?tab=profile');
-
+	
+	return res.json({
+		problem: 'no_problem'
+	});
 }
 
 let signUpPage = function (req, res) {
@@ -231,6 +237,8 @@ module.exports = {
 	changePasswordPage: changePasswordPage,
 	updatePass: updatePass,
 	renderUpdatePage : renderUpdatePage,
-	saveUpdatePage : saveUpdatePage
+	saveUpdatePage : saveUpdatePage,
+	sendMail : sendMail,
+	readHTMLFile : readHTMLFile
 
 }

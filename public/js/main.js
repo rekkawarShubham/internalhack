@@ -18,7 +18,7 @@ function getDomain(url, subdomain) {
 
 let API_BASE = null
 function deletegroup() {
-  let team_code = document.getElementById('teamid').innerText;
+  let team_code = document.getElementById('teamid').value;
   let reg_id = getCookie('uuid');
   data = {
     reg_id: reg_id,
@@ -40,7 +40,7 @@ function deletegroup() {
 
 function removeMember(memberid) {
   let reg_id = document.getElementById(memberid).innerText;
-  let team_code = document.getElementById('teamid').innerText;
+  let team_code = document.getElementById('teamid').value;
   console.log(reg_id, team_code)
   data = {
     reg_id: reg_id,
@@ -80,6 +80,9 @@ function joinTeam() {
       if( res.status == 0 ){
         alert('Team already has 6 members')
       }
+      else if(res.status == 2  ){
+        alert('Invalid team code')        
+      }
       else{
         window.location = "/account/profile?tab=team"
       }
@@ -89,7 +92,6 @@ function joinTeam() {
 
 function createTeam_and_generateCode() {
   let team_name = document.getElementById("team_name_input").value;
-
   let reg_id = getCookie('uuid');
   data = {
     team_leaderid: reg_id,
@@ -104,7 +106,6 @@ function createTeam_and_generateCode() {
     })
     .then(res => res.json())
     .then(function (res) {
-      console.log(res);
       if (res.status == 0) {
         document.getElementById('message').innerText = 'The team name is already taken';
         document.getElementById('message').classList.add('is-danger');
@@ -177,7 +178,7 @@ function display_dashboard(payload) {
   }
 
   document.getElementById('teamname').innerText = payload.team_name;
-  document.getElementById('teamid').innerText = userdata.team_id;
+  document.getElementById('teamid').value = userdata.team_id;
 }
 
 function getCookie(name) {

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PICT Internal Hackathon</title>
+    <title>PICT: iHack2020</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css" />
@@ -14,13 +14,21 @@
         if (document.cookie.indexOf('jwt_token') != -1) {
             window.location = '/account/profile?tab=profile'
         }
-      (function(d, m){
-        var kommunicateSettings = {"appId":"28703ea1cf3fa6f7bf9c8402651c03d74","popupWidget":true,"automaticChatOpenOnNavigation":true};
-        var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
-        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
-        var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
-        window.kommunicate = m; m._globals = kommunicateSettings;
-      })(document, window.kommunicate || {});
+        (function (d, m) {
+            var kommunicateSettings = {
+                "appId": "28703ea1cf3fa6f7bf9c8402651c03d74",
+                "popupWidget": true,
+                "automaticChatOpenOnNavigation": true
+            };
+            var s = document.createElement("script");
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+            var h = document.getElementsByTagName("head")[0];
+            h.appendChild(s);
+            window.kommunicate = m;
+            m._globals = kommunicateSettings;
+        })(document, window.kommunicate || {});
     </script>
 </head>
 
@@ -28,9 +36,9 @@
     <nav class="navbar">
         <div class="container">
             <div class="navbar-brand">
-                <!-- <a class="navbar-item">
-                    <img src="/images/logo.jpeg" width="70" height="38%  ">
-                </a> -->
+                <a class="navbar-item">
+                    <span style="color: #fff;font-weight: bold;font-size: 1.5em" >  iHack </span>
+                </a>
                 <span class="navbar-burger burger"
                     onclick="document.querySelector('.navbar-menu').classList.toggle('is-active');"
                     data-target="navbarMenu">
@@ -87,7 +95,7 @@
                             Registration
                         </h1>
                         <h2 class="subtitle">
-                            Deadline : 19/12/2019
+                            Deadline : 20/12/2019
                         </h2>
                     </center>
                 </div>
@@ -114,7 +122,7 @@
                         </h1>
                         <h2 class="subtitle">
                             Upload PPT<br>
-                            Deadline : 23/12/2019
+                            Deadline : 25/12/2019
                         </h2>
                     </center>
 
@@ -131,7 +139,7 @@
                             Internal Hackathon for Selected teams
                         </h1>
                         <h2 class="subtitle">
-                            Announcement of TOP 30 teams for Internal Hackathon
+                            TOP selected teams will compete for final spot in SIH 2020.
                         </h2>
                     </center>
                 </div>
